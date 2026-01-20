@@ -5,6 +5,8 @@ class Main:
         self.f = open('ip.txt', 'r')
         self.content = self.f.read().split("\n")
     def run(self):
-        print(self.content)
+        for ip in self.content:
+            print(f"Pinguje: {ip}")
+            os.system(f"ping -n 1 {ip}")
 
 Main().run()
