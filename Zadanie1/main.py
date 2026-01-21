@@ -1,5 +1,6 @@
 import subprocess
 import argparse
+import time
 
 class Main:
     def __init__(self):
@@ -31,5 +32,12 @@ class Main:
                     out.write(f"{ip} -> {status}\n")
 
         if self.args.r:
-
+            while True:
+                subprocess.run(
+                    ["ping", "-n", "1", "10.62.6.132"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
+                subprocess.run(["adb", "reboot"])
+                time.sleep(300)
 Main().run()
