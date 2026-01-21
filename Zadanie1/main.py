@@ -1,6 +1,7 @@
 import subprocess
 import argparse
 import time
+import sys
 
 class Main:
     def __init__(self):
@@ -14,7 +15,7 @@ class Main:
         self.parser.add_argument("-r", action="store_true", help="rebooting in 5 min")
         self.args = self.parser.parse_args()
 
-        if self.args.p:
+        if self.args.n:
             with open("result.txt", "w") as out:
                 for ip in self.content:
                     print(f"Pinguje: {ip}")
@@ -33,11 +34,8 @@ class Main:
 
         if self.args.r:
             while True:
-                subprocess.run(
-                    ["ping", "-n", "1", "10.62.6.132"],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL
-                )
+                subprocess.run(["ping", "-n", "1", "10.62.17.180"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                subprocess.run(["adb", "connect", "10.62.17.180"])
                 subprocess.run(["adb", "reboot"])
-                time.sleep(300)
+                time.sleep(120)
 Main().run()
