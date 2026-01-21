@@ -1,7 +1,14 @@
 import subprocess
 import argparse
 import time
-import sys
+import ipaddress
+
+def is_ip(address):
+    try:
+        ipaddress.ip_address(address)
+        return True
+    except ValueError:
+        return False
 
 class Main:
     def __init__(self):
@@ -33,9 +40,16 @@ class Main:
                     out.write(f"{ip} -> {status}\n")
 
         if self.args.r:
-            while True:
-                subprocess.run(["ping", "-n", "1", "10.62.17.180"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                subprocess.run(["adb", "connect", "10.62.17.180"])
-                subprocess.run(["adb", "reboot"])
-                time.sleep(120)
+            print("enter ip to reboot: ")
+            self.reboot_ip = input()
+            
+            while is_ip(self.reboot_ip) == False:
+                self.reboot_ip = input()
+            else:
+                while True:
+                    subprocess.run(["ping", "-n", "1", str(self.reboot_ip)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    subprocess.run(["adb", "connect", str(self.reboot_ip)])
+                    subprocess.run(["adb", "reboot"])
+                    time.sleep(300)
+            
 Main().run()
