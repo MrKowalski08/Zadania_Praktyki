@@ -10,7 +10,7 @@ def is_ip(address):
     except ValueError:
         return False
 
-class Main:
+class Fancy:
     def __init__(self):
         with open("ip.txt", "r") as f:
             self.content = [line.strip() for line in f if line.strip()]
@@ -51,5 +51,4 @@ class Main:
                     subprocess.run(["adb", "connect", str(self.reboot_ip)])
                     subprocess.run(["adb", "reboot"])
                     time.sleep(300)
-            
-Main().run()
+
