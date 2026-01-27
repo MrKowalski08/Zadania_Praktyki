@@ -43,13 +43,13 @@ class Main:
 
         if self.args.r:
             print("enter ip to reboot: ")
-            ip = input()
-            while is_ip(ip) == False:
-                ip = input()
+            self.args_ip = input()
+            while is_ip(self.args_ip) == False:
+                self.args_ip = input()
             else:
                 while True:
-                    subprocess.run(["ping", "-n", "1", str(self.reboot_ip)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    subprocess.run(["adb", "connect", str(self.reboot_ip)])
+                    subprocess.run(["ping", "-n", "1", str(self.args_ip)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    subprocess.run(["adb", "connect", str(self.args_ip)])
                     subprocess.run(["adb", "reboot"])
                     time.sleep(300)
 
@@ -57,11 +57,11 @@ class Main:
             FILE_PATH = "/data/data/pl.inelo.assist/shared_prefs/NetworkPreferences.xml"
 
             print("enter ip: ")
-            ip = input()
-            while is_ip(ip) == False:
-                ip = input()
+            self.args_ip = input()
+            while is_ip(self.args_ip) == False:
+                self.args_ip = input()
             else:
-                subprocess.run(["adb", "connect", str(self.ip)])
+                subprocess.run(["adb", "connect", str(self.args_ip)])
                 result = subprocess.run(["adb", "shell", "cat", FILE_PATH],
                         capture_output=True,
                         text=True,
