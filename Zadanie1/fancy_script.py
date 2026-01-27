@@ -61,7 +61,7 @@ class Main:
             while is_ip(ip) == False:
                 ip = input()
             else:
-                subprocess.run(["adb", "connect", str(self.search_ip)])
+                subprocess.run(["adb", "connect", str(self.ip)])
                 result = subprocess.run(["adb", "shell", "cat", FILE_PATH],
                         capture_output=True,
                         text=True,
