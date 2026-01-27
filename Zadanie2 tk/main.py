@@ -34,6 +34,8 @@ class App:
         self.btn_reboot = tk.Button(self.frame, text="Start Rebooting", command= lambda: threading.Thread(target=self.fancy.reboot_ip,args=(self.reboot_enter_ip,),daemon=True).start())
         self.btn_reboot.configure(bg="#575757",fg="#FFFFFF", width=20)
         self.btn_search_np = tk.Button(self.frame, text="Start Rebooting", command= lambda: threading.Thread(target=self.fancy.search_NetworkPref,args=(self.search_np_enter_ip,),daemon=True).start())
+        self.btn_search_np.configure(bg="#575757",fg="#FFFFFF", width=20)
+
         
     def run(self):
         self.frame.grid(row=0,column=0, sticky="nsew")
