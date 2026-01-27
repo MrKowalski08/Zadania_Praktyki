@@ -1,6 +1,7 @@
 import subprocess
 import time
 import tkinter as tk
+import xml.etree.ElementTree as ET
 
 class Fancy:
     def add_to_list(self, address, list):
@@ -36,3 +37,14 @@ class Fancy:
             subprocess.run(["adb", "connect", ip])
             subprocess.run(["adb", "reboot"])
             time.sleep(300)
+
+    def search_NetworkPref(self, ip):
+        FILE_PATH = "/data/data/pl.inelo.assist/shared_prefs/NetworkPreferences.xml"
+        subprocess.run(["adb", "connect", str(ip)])
+        result = subprocess.run(["adb", "shell", "cat", FILE_PATH],
+                capture_output=True,
+                text=True,
+        )
+        data = ET.fromstring(result.stdout)
+        print(data.find(".//string[@name='fileServer']").text)
+        subprocess.run(["adb","disconnect"])
