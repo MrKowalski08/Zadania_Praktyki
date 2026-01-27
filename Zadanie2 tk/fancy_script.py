@@ -38,12 +38,14 @@ class Fancy:
             subprocess.run(["adb", "reboot"])
             time.sleep(300)
 
-    def search_NetworkPref(self, ip):
+    def search_NetworkPref(self, input):
+        ip = input.get()
         FILE_PATH = "/data/data/pl.inelo.assist/shared_prefs/NetworkPreferences.xml"
         subprocess.run(["adb", "connect", str(ip)])
-        result = subprocess.run(["adb", "shell", "cat", FILE_PATH],
-                capture_output=True,
-                text=True,
+        subprocess.run(["adb", "root"])
+        result = subprocess.run(["adb", "shell", "-n", "cat", FILE_PATH],
+                    capture_output=True,
+                    text=True,
         )
         data = ET.fromstring(result.stdout)
         print(data.find(".//string[@name='fileServer']").text)
