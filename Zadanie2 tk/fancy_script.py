@@ -11,7 +11,7 @@ class Fancy:
             list.insert(tk.END, text)
             address.delete(0, tk.END)
 
-    def get_from_file(self, ip):
+    # def get_from_file(self, ip):
         
     
 

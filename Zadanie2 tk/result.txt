@@ -1,0 +1,3 @@
+10.62.15.6 -> True
+wpisujemy ip z listy lub nie i wtedy wszystkie funkcje mogą korzystać z tego.
+przycisk "i" z info o funkcji
