@@ -48,3 +48,4 @@ class Fancy:
         data = ET.fromstring(result.stdout)
         print(data.find(".//string[@name='fileServer']").text)
         subprocess.run(["adb","disconnect"])
+        
